@@ -27,7 +27,7 @@ struct HomeView<Router: HomeRouter>: View {
         Button {
             router.process(.showHistory)
         } label: {
-            Image(systemName: "plus")
+            Image(systemName: "photo.stack")
         }
     }
 }
