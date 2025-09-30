@@ -1,0 +1,51 @@
+//
+//  HomeCoordinator.swift
+//  Image-Capture-POC
+//
+//  Created by Jose Luna on 9/26/25.
+//
+
+import SwiftUI
+
+final class HomeCoordinator<Router: AppRouter> {
+    
+    private let router: Router
+    
+    lazy var primaryViewController: UIViewController = {
+        let view = HomeView(router: self)
+        let viewController = UIHostingController(rootView: view)
+        return viewController
+    }()
+    
+    init(router: Router) {
+        self.router = router
+    }
+}
+
+// MARK: - Coordinator
+
+extension HomeCoordinator: Coordinator {
+    func start() {
+        navigationController?.pushViewController(primaryViewController, animated: true)
+    }
+    
+    func exit() {
+        navigationController?.popToRootViewController(animated: true)
+    }
+}
+
+// MARK: - Router
+
+extension HomeCoordinator: HomeRouter {
+    
+    var navigationController: UINavigationController? {
+        router.navigationController
+    }
+    
+    func process(_ route: HomeTransition) {
+        switch route {
+            case .showHistory:
+                router.process(.showHistory)
+        }
+    }
+}
