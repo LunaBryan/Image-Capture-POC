@@ -10,24 +10,21 @@ import UIKit
 final class AppCoordinator {
     private var coordinatorRegister: [AppTransition: Coordinator] = [:]
     
-    lazy var navigationController: UINavigationController? = {
-        .init()
-    }()
+    private(set) var navigationController: UINavigationController = .init()
 }
 
 // MARK: - Coordinator
 
 extension AppCoordinator: Coordinator {
     func start() {
-        process(.showHome)
+        process(route: .showHome)
     }
 }
-
 
 // MARK: - Router
 
 extension AppCoordinator: AppRouter {
-    func process(_ route: AppTransition) {
+    func process(route: AppTransition) {
         debugPrint("Processing route: \(route.rawValue)")
         let coordinator = coordinatorRegister[route] ?? route.coordinator(for: self)
         coordinatorRegister[route] = coordinator
@@ -35,6 +32,6 @@ extension AppCoordinator: AppRouter {
     }
     
     func exit() {
-        navigationController?.popToRootViewController(animated: true)
+        navigationController.popToRootViewController(animated: true)
     }
 }

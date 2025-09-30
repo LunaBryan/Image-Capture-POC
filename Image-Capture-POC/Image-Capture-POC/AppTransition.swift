@@ -5,7 +5,7 @@
 //  Created by Jose Luna on 9/26/25.
 //
 
-enum AppTransition: String, CaseIterable {
+enum AppTransition: String {
     case showHome
     case showHistory
     

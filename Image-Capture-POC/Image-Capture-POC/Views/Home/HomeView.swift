@@ -25,7 +25,7 @@ struct HomeView<Router: HomeRouter>: View {
     
     private var historyButton: some View {
         Button {
-            router.process(.showHistory)
+            router.process(route: .showHistory)
         } label: {
             Image(systemName: "photo.stack")
         }

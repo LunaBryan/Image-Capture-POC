@@ -11,9 +11,9 @@ final class HomeCoordinator<Router: AppRouter> {
     
     private let router: Router
     
-    var navigationController: UINavigationController? { router.navigationController }
+    var navigationController: UINavigationController { router.navigationController }
     
-    lazy var primaryViewController: UIViewController = {
+    private lazy var primaryViewController: UIViewController = {
         let view = HomeView(router: self)
         let viewController = UIHostingController(rootView: view)
         return viewController
@@ -28,21 +28,21 @@ final class HomeCoordinator<Router: AppRouter> {
 
 extension HomeCoordinator: Coordinator {
     func start() {
-        navigationController?.pushViewController(primaryViewController, animated: true)
+        navigationController.pushViewController(primaryViewController, animated: true)
     }
 }
 
 // MARK: - Router
 
 extension HomeCoordinator: HomeRouter {
-    func process(_ route: HomeTransition) {
+    func process(route: HomeTransition) {
         switch route {
             case .showHistory:
-                router.process(.showHistory)
+                router.process(route: .showHistory)
         }
     }
     
     func exit() {
-        navigationController?.popToRootViewController(animated: true)
+        navigationController.popToRootViewController(animated: true)
     }
 }

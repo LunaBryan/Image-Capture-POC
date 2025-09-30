@@ -10,7 +10,8 @@ import UIKit
 protocol Router {
     associatedtype Route
     
-    var navigationController: UINavigationController? { get }
+    var navigationController: UINavigationController { get }
     
-    func process(_ route: Route)
+    func process(route: Route)
+    func exit()
 }

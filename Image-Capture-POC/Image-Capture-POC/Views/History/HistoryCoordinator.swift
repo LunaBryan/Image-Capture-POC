@@ -11,9 +11,9 @@ final class HistoryCoordinator<Router: AppRouter> {
     
     private let router: Router
     
-    var navigationController: UINavigationController? { router.navigationController }
+    var navigationController: UINavigationController { router.navigationController }
     
-    lazy var primaryViewController: UIViewController = {
+    private lazy var primaryViewController: UIViewController = {
         let view = HistoryListView()
         let viewController = UIHostingController(rootView: view)
         return viewController
@@ -28,23 +28,18 @@ final class HistoryCoordinator<Router: AppRouter> {
 
 extension HistoryCoordinator: Coordinator {
     func start() {
-        navigationController?.pushViewController(primaryViewController, animated: true)
+        navigationController.pushViewController(primaryViewController, animated: true)
     }
 }
 
 // MARK: - Router
 
 extension HistoryCoordinator: HistoryRouter {
-    func process(_ route: HistoryTransition) {
-        switch route {
-            case .showHome:
-                router.process(.showHome)
-            case .showDetail:
-                break
-        }
+    func process(route: HistoryTransition) {
+        // TODO: - Handle history flow
     }
     
     func exit() {
-        navigationController?.popToRootViewController(animated: true)
+        navigationController.popToRootViewController(animated: true)
     }
 }
