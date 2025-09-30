@@ -15,6 +15,15 @@ final class AppCoordinator {
     }()
 }
 
+// MARK: - Coordinator
+
+extension AppCoordinator: Coordinator {
+    func start() {
+        process(.showHome)
+    }
+}
+
+
 // MARK: - Router
 
 extension AppCoordinator: AppRouter {
@@ -23,14 +32,6 @@ extension AppCoordinator: AppRouter {
         let coordinator = coordinatorRegister[route] ?? route.coordinator(for: self)
         coordinatorRegister[route] = coordinator
         coordinator.start()
-    }
-}
-
-// MARK: - Coordinator
-
-extension AppCoordinator: Coordinator {
-    func start() {
-        process(.showHome)
     }
     
     func exit() {

@@ -13,5 +13,4 @@ protocol Router {
     var navigationController: UINavigationController? { get }
     
     func process(_ route: Route)
-    func exit()
 }
